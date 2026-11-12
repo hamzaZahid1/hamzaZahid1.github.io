@@ -55,7 +55,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 
 /* hero */
 header.hero { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
-.role { font-size: 1.05rem; color: var(--muted); }
+.role { font-size: clamp(1.15rem, 3.4vw, 1.4rem); font-weight: 500; color: var(--fg); }
 .pitch { font-size: 1.15rem; max-width: 34em; }
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
 .stat { border-top: 2px solid var(--accent); padding-top: 10px; }
@@ -162,7 +162,7 @@ html { scroll-behavior: smooth; }
   <header class="hero">
     <p class="eyebrow">Hamza Zahid · Portfolio</p>
     <h1>GTM Engineer</h1>
-    <p class="role">Senior Revenue Operations Manager · I build GTM systems in Clay, n8n and HubSpot</p>
+    <p class="role">I build &amp; scale GTM Systems for B2B Companies</p>
     <p class="pitch">I build the data and automation systems behind prospecting, enrichment, signal detection and CRM hygiene, not just run them.</p>
     <div class="hero-stack" aria-label="Stack">
       <span class="eyebrow">Stack</span>
