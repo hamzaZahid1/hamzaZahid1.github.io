@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Hamza · GTM Systems</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Case studies in RevOps and GTM systems: job-change detection, M&amp;A buyer and seller prospecting in Clay, a 185,000+ lead qualification engine and a company enrichment pipeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one 760px column, read top to bottom like an engineering write-up. Ink-blue accent, amber only for draft markers. */
+:root {
+  --bg: #F4F5F7; --surface: #FFFFFF; --fg: #18212C; --muted: #576272; --line: #D3D9E1;
+  --accent: #2A5D84; --accent-soft: #E4EDF5;
+  --amber-bg: #FCEFCF; --amber-fg: #774B00; --amber-line: #D9A13B;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11161D; --surface: #18202A; --fg: #E5E9EF; --muted: #9AA6B5; --line: #2E3948;
+  --accent: #82B3DB; --accent-soft: #1C2B3A;
+  --amber-bg: #3A2B0C; --amber-fg: #F3C66C; --amber-line: #A87B23; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #11161D; --surface: #18202A; --fg: #E5E9EF; --muted: #9AA6B5; --line: #2E3948;
+  --accent: #82B3DB; --accent-soft: #1C2B3A;
+  --amber-bg: #3A2B0C; --amber-fg: #F3C66C; --amber-line: #A87B23; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; font-weight: 600; }
+h1 { font-size: clamp(2rem, 6vw, 2.6rem); letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1rem; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+.eyebrow { font: 500 12px/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); }
+
+/* draft markers */
+.mk { display: inline-block; font: 500 11.5px/1.5 var(--mono); color: var(--amber-fg); background: var(--amber-bg);
+  border: 1px solid var(--amber-line); border-radius: 999px; padding: 0 8px; vertical-align: 1px; white-space: normal; }
+.wrap:not(.draft) .mk, .wrap:not(.draft) .draft-only { display: none !important; }
+.wrap.draft.preview .mk, .wrap.draft.preview .draft-only:not(.draft-banner) { display: none !important; }
+.draft-banner { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between;
+  font: 13px/1.4 var(--sans); color: var(--amber-fg); background: var(--amber-bg); border: 1px solid var(--amber-line);
+  border-radius: 8px; padding: 10px 14px; margin-bottom: 28px; }
+.draft-banner button { font: 500 12.5px var(--sans); color: var(--amber-fg); background: transparent; border: 1px solid var(--amber-line);
+  border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+
+/* hero */
+header.hero { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.role { font-size: 1.05rem; color: var(--muted); }
+.pitch { font-size: 1.15rem; max-width: 34em; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 8px; }
+.stat { border-top: 2px solid var(--accent); padding-top: 10px; }
+.stat b { display: block; font: 500 1.6rem/1.1 var(--mono); font-variant-numeric: tabular-nums; color: var(--fg); }
+.stat span { font-size: 0.88rem; color: var(--muted); }
+.cert { font: 500 0.88rem/1.4 var(--mono); }
+.cert a { text-decoration: none; }
+.cert a:hover { text-decoration: underline; }
+.contact { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.92rem; color: var(--muted); margin-top: 6px; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; padding-block: 16px; border-bottom: 1px solid var(--line); }
+nav.toc a { text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+
+section { padding-top: 44px; display: grid; gap: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font: 400 13px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+
+/* case studies */
+article.case { padding-top: 44px; display: grid; gap: 18px; }
+article.case + article.case { border-top: 1px solid var(--line); margin-top: 8px; }
+.case-head { display: grid; gap: 6px; }
+.problem { font-size: 1.08rem; }
+.kv { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 10px 20px; }
+.kv > dt { font: 500 12px/1.9 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.kv > dd { margin: 0; min-width: 0; }
+.kv ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.stack { font-family: var(--mono); font-size: 0.9rem; }
+table.results { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+table.results td { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.results td:first-child { font: 500 0.95rem var(--mono); font-variant-numeric: tabular-nums; width: 9.5em; padding-right: 14px; }
+.later { color: var(--muted); }
+.est { display: grid; gap: 8px; }
+.est-pill { color: var(--accent); border-color: var(--accent); }
+.basis { font-size: 0.85rem; color: var(--muted); }
+.basis a { color: var(--muted); }
+
+
+figure.diagram { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.dg-scroll { overflow-x: auto; }
+.dg { display: block; width: 100%; height: auto; max-width: 100%; color: var(--muted); }
+.dg-tall { display: none; max-width: 380px; margin: 0 auto; }
+@media (max-width: 620px) { .dg-wide { display: none; } .dg-tall { display: block; } }
+figcaption { margin-top: 10px; font-size: 0.85rem; color: var(--muted); }
+figcaption .tag { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-right: 6px; }
+.dg text { font-family: var(--sans); font-size: 12.5px; fill: var(--fg); }
+.dg text.cnt { font-family: var(--mono); font-size: 11px; fill: var(--accent); }
+.dg text.lbl { font-size: 10.5px; fill: var(--muted); }
+.dg text.bl { font-family: var(--mono); font-size: 10.5px; fill: var(--accent); }
+.dg .n { fill: var(--surface); stroke: var(--line); stroke-width: 1.3; }
+.dg .n.key { stroke: var(--accent); }
+.dg .n.tbc { stroke: var(--amber-line); stroke-dasharray: 5 4; }
+.dg .edge { fill: none; stroke: var(--muted); stroke-width: 1.3; }
+.dg .edge.tbc { stroke: var(--amber-line); stroke-dasharray: 5 4; }
+.dg .ah { fill: var(--muted); }
+.dg .band { fill: var(--accent-soft); }
+figure.shot { margin: 0; }
+.shots { display: grid; gap: 18px; }
+figure.shot figcaption { margin-top: 8px; }
+figure.shot img { display: block; width: 100%; height: auto; }
+figure.shot img { border: 1px solid var(--line); border-radius: 8px; }
+
+/* smaller cards */
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.card p { font-size: 0.95rem; }
+.concept { border: 1px dashed var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 10px; }
+.pill { justify-self: start; font: 500 11px/1.6 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; }
+ul.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+ul.plain li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.status { font: 500 11.5px var(--mono); color: var(--muted); }
+.status.done { color: var(--accent); }
+footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); }
+
+@media (max-width: 560px) {
+  .stats { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+  .kv { grid-template-columns: 1fr; gap: 2px; }
+  .kv > dd { margin-bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+
+@media print {
+  :root, :root[data-theme="dark"] { --bg: #fff; --surface: #fff; --fg: #000; --muted: #333; --line: #bbb; --accent: #000; --accent-soft: #eee; }
+  body { font-size: 10pt; line-height: 1.45; }
+  .wrap { max-width: none; padding: 0; }
+  .draft-banner, nav.toc { display: none !important; }
+  .dg-wide { display: block !important; } .dg-tall { display: none !important; }
+  section, article.case { padding-top: 18px; gap: 10px; }
+  figure.diagram, .card, table.results, .concept { break-inside: avoid; }
+  figure.diagram { padding: 8px; }
+  a { color: #000; text-decoration: none; }
+  .stat b { font-size: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap" id="top">
+
+  <header class="hero">
+    <p class="eyebrow">Portfolio · RevOps and GTM systems</p>
+    <h1>Hamza Zahid</h1>
+    <p class="role">Senior Revenue Operations Manager · GTM Systems</p>
+    <p class="cert"><a href="https://app-na2.hubspot.com/academy/achievements/w6p419qp/en/1/hamza-zahid/revenue-operations" target="_blank" rel="noopener">HubSpot Revenue Operations Certified</a></p>
+    <p class="pitch">I build the data and automation systems behind prospecting, enrichment and CRM hygiene.</p>
+    <div class="stats">
+      <div class="stat"><b>10,000</b><span>leads monitored for job changes</span></div>
+      <div class="stat"><b>185,000+</b><span>leads sourced and qualified</span></div>
+      <div class="stat"><b>~79K</b><span>companies consolidated and enriched</span></div>
+    </div>
+    <div class="contact">
+      
+      <span>hamzahz104@gmail.com</span>
+      <span>Islamabad, UTC+5, open to remote US/EU roles</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <a href="#job-change">Job-change detection</a>
+    <a href="#comcap">M&amp;A prospecting</a>
+    <a href="#prospecting">Prospecting engine</a>
+    <a href="#enrichment">Enrichment pipeline</a>
+    <a href="#also">Also built</a>
+    <a href="#next">Next</a>
+  </nav>
+
+  <section aria-labelledby="stack-h">
+    <h2 id="stack-h" class="eyebrow">Stack</h2>
+    <div class="chips">
+      <span>HubSpot</span><span>Clay</span><span>Apollo</span><span>n8n</span><span>Apify</span><span>Prospeo</span>
+      <span>ZeroBounce</span><span>Zapier</span><span>Claude API</span><span>SQL</span><span>Power BI</span>
+      <span>Google Sheets</span><span>Excel/VBA</span><span>Python (AI-assisted)</span>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDY 1 ============ -->
+  <article class="case" id="job-change">
+    <div class="case-head">
+      <p class="eyebrow">Case study</p>
+      <h2>Job-change detection</h2>
+    </div>
+    <p class="problem">Spot job changes across 10,000 HubSpot leads on a regular cycle.</p>
+    <figure class="diagram"><div class="dg-scroll"><svg class="dg dg-wide" viewBox="0 0 720 210" role="img" aria-label="Job-change detection: HubSpot leads (10,000) go to an n8n weekly scheduler that takes 2,500 per sweep, Apify fetches profiles, each is compared with a snapshot stored in contact properties, and changed records are updated in HubSpot."><defs><marker id="ah1w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><rect class="n" x="10" y="30" width="150" height="60" rx="6"/><text x="85" y="56" text-anchor="middle">HubSpot leads</text><text x="85" y="71" text-anchor="middle" class="cnt">10,000</text><rect class="n key" x="190" y="30" width="150" height="60" rx="6"/><text x="265" y="56" text-anchor="middle">n8n scheduler</text><text x="265" y="71" text-anchor="middle" class="cnt">2,500 per week</text><rect class="n" x="370" y="30" width="150" height="60" rx="6"/><text x="445" y="56" text-anchor="middle">Apify</text><text x="445" y="71" text-anchor="middle" class="lbl">profile fetch</text><rect class="n key" x="550" y="30" width="150" height="60" rx="6"/><text x="625" y="56" text-anchor="middle">Compare with snapshot</text><text x="625" y="71" text-anchor="middle" class="lbl">in contact properties</text><path class="edge" d="M160,60 L188,60" marker-end="url(#ah1w)"/><path class="edge" d="M340,60 L368,60" marker-end="url(#ah1w)"/><path class="edge" d="M520,60 L548,60" marker-end="url(#ah1w)"/><text x="265" y="112" text-anchor="middle" class="lbl">4 sweeps ≈ every lead about once a month</text><path class="edge" d="M625,90 L625,136" marker-end="url(#ah1w)"/><path class="n key" d="M625,138 L677,170 L625,202 L573,170 Z"/><text x="625" y="174" text-anchor="middle">Changed?</text><path class="edge" d="M573,170 L522,170" marker-end="url(#ah1w)"/><text x="548" y="162" text-anchor="middle" class="lbl">yes</text><rect class="n" x="370" y="145" width="150" height="50" rx="6"/><text x="445" y="166" text-anchor="middle">Update HubSpot</text><text x="445" y="181" text-anchor="middle" class="lbl">contact record</text></svg><svg class="dg dg-tall" viewBox="0 0 340 470" role="img" aria-label="Job-change detection: HubSpot leads (10,000) go to an n8n weekly scheduler that takes 2,500 per sweep, Apify fetches profiles, each is compared with a snapshot stored in contact properties, and changed records are updated in HubSpot."><defs><marker id="ah1t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><rect class="n" x="40" y="10" width="260" height="50" rx="6"/><text x="170" y="31" text-anchor="middle">HubSpot leads</text><text x="170" y="46" text-anchor="middle" class="cnt">10,000</text><path class="edge" d="M170.0,60 L170.0,84" marker-end="url(#ah1t)"/><rect class="n key" x="40" y="86" width="260" height="50" rx="6"/><text x="170" y="107" text-anchor="middle">n8n scheduler</text><text x="170" y="122" text-anchor="middle" class="cnt">2,500 per week</text><path class="edge" d="M170.0,136 L170.0,160" marker-end="url(#ah1t)"/><rect class="n" x="40" y="162" width="260" height="50" rx="6"/><text x="170" y="183" text-anchor="middle">Apify</text><text x="170" y="198" text-anchor="middle" class="lbl">profile fetch</text><path class="edge" d="M170.0,212 L170.0,236" marker-end="url(#ah1t)"/><rect class="n key" x="40" y="238" width="260" height="50" rx="6"/><text x="170" y="259" text-anchor="middle">Compare with snapshot</text><text x="170" y="274" text-anchor="middle" class="lbl">in contact properties</text><path class="edge" d="M170,290 L170,308" marker-end="url(#ah1t)"/><path class="n key" d="M170,310 L232,340 L170,370 L108,340 Z"/><text x="170" y="344" text-anchor="middle">Changed?</text><path class="edge" d="M108,340 L85,340 L85,398" marker-end="url(#ah1t)"/><text x="96" y="332" text-anchor="middle" class="lbl">yes</text><rect class="n" x="10" y="400" width="150" height="50" rx="6"/><text x="85" y="421" text-anchor="middle">Update HubSpot</text><text x="85" y="436" text-anchor="middle" class="lbl">contact record</text><text x="170" y="460" text-anchor="middle" class="lbl">4 sweeps ≈ every lead about once a month</text></svg></div><figcaption><span class="tag">Diagram</span> Weekly job-change sweep.</figcaption></figure>
+    <dl class="kv">
+      <dt>Stack</dt>
+      <dd class="stack">n8n · Apify · HubSpot (custom contact properties)</dd>
+      <dt>Decisions</dt>
+      <dd><ul>
+        <li>n8n orchestrates the run and Apify fetches the profiles.</li>
+        <li>Each lead's previous state is saved as a snapshot in custom HubSpot contact properties, and every sweep compares against it.</li>
+        <li>Weekly sweeps of 2,500 records, so four sweeps cover all 10,000 leads roughly once a month.</li>
+      </ul></dd>
+      <dt>Results</dt>
+      <dd><table class="results"><tbody>
+        <tr><td>10,000</td><td>HubSpot leads in scope</td></tr>
+        <tr><td>2,500</td><td>records per weekly sweep</td></tr>
+      </tbody></table></dd>
+      <dt>Est. impact</dt>
+      <dd class="est"><span class="pill est-pill">Estimate, not measured</span><table class="results"><tbody><tr><td>~2,000</td><td>job changes surfaced per year across 10,000 leads, about 170 a month</td></tr><tr><td>2x</td><td>typical win rate on deals with a former champion (39% vs under 19% SaaS average)</td></tr></tbody></table><p class="basis">Basis: assumes about 20% of contacts change jobs each year, in line with <a href="https://www.usergems.com/product/contact-tracking" target="_blank" rel="noopener">UserGems</a> (20%+ of CRM contacts have moved) and <a href="https://lifestyle.capitalcityrock.com/story/121710/signalhire-data-reveals-30-of-b2b-contact-records-go-stale-every-year-database-decay-costs-about-546-hours-annually/" target="_blank" rel="noopener">SignalHire</a> (30% of B2B records go stale a year). Win rates from <a href="https://www.champify.io/resources/the-impact-of-tracking-job-changes-value-report" target="_blank" rel="noopener">Champify</a>.</p></dd>
+    </dl>
+  </article>
+
+  <!-- ============ CASE STUDY: COMCAP ============ -->
+  <article class="case" id="comcap">
+    <div class="case-head">
+      <p class="eyebrow">Case study · Comcap, M&amp;A</p>
+      <h2>M&amp;A buyer and seller prospecting in Clay</h2>
+    </div>
+    <p class="problem">Find buy-side and sell-side target companies from signals, reach the right decision makers, and keep HubSpot current without adding records twice.</p>
+    <figure class="diagram"><div class="dg-scroll"><svg class="dg dg-wide" viewBox="0 0 760 240" role="img" aria-label="Comcap M&amp;A prospecting in Clay: buyer-side and seller-side tables find companies from signals, each company is checked against HubSpot, companies already in HubSpot get their records updated, new ones get up to two senior decision makers found, AI columns clean name and title, email and LinkedIn are looked up, QA tables check the output, and results go to HubSpot."><defs><marker id="ah4w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><text x="70" y="16" text-anchor="middle" class="bl">Clay tables</text><rect class="n key" x="10" y="24" width="120" height="40" rx="6"/><text x="70" y="47.5" text-anchor="middle">Buyer side</text><rect class="n key" x="10" y="78" width="120" height="40" rx="6"/><text x="70" y="101.5" text-anchor="middle">Seller side</text><path class="edge" d="M130,44 L148,44 L148,71"/><path class="edge" d="M130,98 L148,98 L148,71"/><path class="edge" d="M130,71 L158,71" marker-end="url(#ah4w)"/><rect class="n" x="160" y="44" width="130" height="54" rx="6"/><text x="225" y="67" text-anchor="middle">Target companies</text><text x="225" y="82" text-anchor="middle" class="lbl">from signals</text><path class="edge" d="M290,71 L308,71" marker-end="url(#ah4w)"/><path class="n key" d="M360,41 L410,71 L360,101 L310,71 Z"/><text x="360" y="75" text-anchor="middle">In HubSpot?</text><path class="edge" d="M410,71 L438,71" marker-end="url(#ah4w)"/><text x="424" y="63" text-anchor="middle" class="lbl">no</text><rect class="n key" x="440" y="44" width="140" height="54" rx="6"/><text x="510" y="67" text-anchor="middle">Find decision makers</text><text x="510" y="82" text-anchor="middle" class="cnt">up to 2 per company</text><path class="edge" d="M580,71 L608,71" marker-end="url(#ah4w)"/><rect class="n" x="610" y="44" width="140" height="54" rx="6"/><text x="680" y="67" text-anchor="middle">AI columns</text><text x="680" y="82" text-anchor="middle" class="lbl">full name, first, last, title</text><path class="edge" d="M680,98 L680,168" marker-end="url(#ah4w)"/><rect class="n" x="610" y="170" width="140" height="54" rx="6"/><text x="680" y="193" text-anchor="middle">Email / LinkedIn</text><text x="680" y="208" text-anchor="middle" class="lbl">lookup by name + company</text><path class="edge" d="M610,197 L582,197" marker-end="url(#ah4w)"/><rect class="n" x="440" y="170" width="140" height="54" rx="6"/><text x="510" y="193" text-anchor="middle">QA tables</text><text x="510" y="208" text-anchor="middle" class="lbl">check before handoff</text><path class="edge" d="M440,197 L432,197" marker-end="url(#ah4w)"/><rect class="n key" x="290" y="170" width="140" height="54" rx="6"/><text x="360" y="193" text-anchor="middle">HubSpot</text><text x="360" y="208" text-anchor="middle" class="lbl">add new or update existing</text><path class="edge" d="M360,101 L360,168" marker-end="url(#ah4w)"/><text x="368" y="140" text-anchor="start" class="lbl">yes: update record</text></svg><svg class="dg dg-tall" viewBox="0 0 340 592" role="img" aria-label="Comcap M&amp;A prospecting in Clay: buyer-side and seller-side tables find companies from signals, each company is checked against HubSpot, companies already in HubSpot get their records updated, new ones get up to two senior decision makers found, AI columns clean name and title, email and LinkedIn are looked up, QA tables check the output, and results go to HubSpot."><defs><marker id="ah4t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><text x="170" y="12" text-anchor="middle" class="bl">Clay tables</text><rect class="n key" x="20" y="20" width="140" height="40" rx="6"/><text x="90" y="43.5" text-anchor="middle">Buyer side</text><rect class="n key" x="180" y="20" width="140" height="40" rx="6"/><text x="250" y="43.5" text-anchor="middle">Seller side</text><path class="edge" d="M90,60 L90,74 L170,74"/><path class="edge" d="M250,60 L250,74 L170,74"/><path class="edge" d="M170,74 L170,86" marker-end="url(#ah4t)"/><rect class="n" x="40" y="88" width="260" height="50" rx="6"/><text x="170" y="109" text-anchor="middle">Target companies</text><text x="170" y="124" text-anchor="middle" class="lbl">from signals</text><path class="edge" d="M170,138 L170,156" marker-end="url(#ah4t)"/><path class="n key" d="M170,158 L232,186 L170,214 L108,186 Z"/><text x="170" y="190" text-anchor="middle">In HubSpot?</text><text x="276" y="178" text-anchor="middle" class="lbl">yes: update</text><path class="edge" d="M170,214 L170,234" marker-end="url(#ah4t)"/><text x="178" y="228" text-anchor="start" class="lbl">no</text><rect class="n key" x="40" y="236" width="260" height="50" rx="6"/><text x="170" y="257" text-anchor="middle">Find decision makers</text><text x="170" y="272" text-anchor="middle" class="cnt">up to 2 per company</text><path class="edge" d="M170.0,286 L170.0,308" marker-end="url(#ah4t)"/><rect class="n" x="40" y="310" width="260" height="50" rx="6"/><text x="170" y="331" text-anchor="middle">AI columns</text><text x="170" y="346" text-anchor="middle" class="lbl">full name, first, last, title</text><path class="edge" d="M170.0,360 L170.0,382" marker-end="url(#ah4t)"/><rect class="n" x="40" y="384" width="260" height="50" rx="6"/><text x="170" y="405" text-anchor="middle">Email / LinkedIn lookup</text><text x="170" y="420" text-anchor="middle" class="lbl">by name + company</text><path class="edge" d="M170.0,434 L170.0,456" marker-end="url(#ah4t)"/><rect class="n" x="40" y="458" width="260" height="50" rx="6"/><text x="170" y="479" text-anchor="middle">QA tables</text><text x="170" y="494" text-anchor="middle" class="lbl">check before handoff</text><path class="edge" d="M170,508 L170,530" marker-end="url(#ah4t)"/><rect class="n key" x="40" y="532" width="260" height="50" rx="6"/><text x="170" y="553" text-anchor="middle">HubSpot</text><text x="170" y="568" text-anchor="middle" class="lbl">add new or update existing</text><path class="edge" d="M232,186 L322,186 L322,557 L302,557" marker-end="url(#ah4t)"/></svg></div><figcaption><span class="tag">Diagram</span> Buyer and seller side prospecting in Clay, with a HubSpot check before anything new is added.</figcaption></figure>
+    <dl class="kv">
+      <dt>Stack</dt>
+      <dd class="stack">Clay (find companies, signals, find people, AI columns) · HubSpot</dd>
+      <dt>Decisions</dt>
+      <dd><ul>
+        <li>Separate Clay tables for the buyer side and the seller side, each identifying companies from signals.</li>
+        <li>Every target company is checked against HubSpot first. If the company is already there, its record is updated instead of being added again.</li>
+        <li>Up to two senior decision makers per company, found in Clay. AI columns split each result into full name, first name, last name and job title.</li>
+        <li>Email and LinkedIn are looked up by name and company, and QA tables check the output before it goes to HubSpot.</li>
+        <li>Run conditions skip rows that don't meet the criteria, so lookups only run where they are needed.</li>
+      </ul></dd>
+      <dt>Results</dt>
+      <dd><table class="results"><tbody>
+        <tr><td>2</td><td>senior decision makers targeted per company</td></tr>
+        <tr><td>93% to 96%</td><td>of companies with senior contacts found, on the tables shown below</td></tr>
+      </tbody></table></dd>
+      <dt>Est. impact</dt>
+      <dd class="est"><span class="pill est-pill">Estimate, not measured</span><table class="results"><tbody><tr><td>up to ~190</td><td>senior contacts per 100 target companies (2 per company at 93% to 96% coverage)</td></tr><tr><td>~30%</td><td>of existing HubSpot contacts likely refreshed a year by updating instead of re-adding</td></tr></tbody></table><p class="basis">Basis: coverage from the Clay tables shown above. Annual record decay of about 30% from <a href="https://lifestyle.capitalcityrock.com/story/121710/signalhire-data-reveals-30-of-b2b-contact-records-go-stale-every-year-database-decay-costs-about-546-hours-annually/" target="_blank" rel="noopener">SignalHire</a>.</p></dd>
+    </dl>
+    <div class="shots">
+      <figure class="shot"><a href="shots/comcap-workbook-canvas.jpg" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="shots/comcap-workbook-canvas.jpg" alt="One Clay workbook containing dozens of prospecting tables" loading="lazy" width="1912" height="895"></a><figcaption><span class="tag">Screenshot</span> Tap to open full size. One workbook, "2 Prospects Per company", holding dozens of prospecting tables. Table names are hidden.</figcaption></figure>
+      <figure class="shot"><a href="shots/comcap-workbooks.jpg" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="shots/comcap-workbooks.jpg" alt="Clay workspace listing workbooks for prospect identification, email and LinkedIn lookup, M&amp;A, prospects not in HubSpot, QA and two prospects per company" loading="lazy" width="1917" height="882"></a><figcaption><span class="tag">Screenshot</span> The Clay workspace, with workbooks for prospect identification, email and LinkedIn lookup, M&amp;A, prospects not yet in HubSpot, and QA.</figcaption></figure>
+      <figure class="shot"><a href="shots/comcap-senior-contacts.jpg" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="shots/comcap-senior-contacts.jpg" alt="Clay table finding senior contacts per company, with AI columns for name and job title" loading="lazy" width="1912" height="895"></a><figcaption><span class="tag">Screenshot</span> Two prospects per company: Clay finds senior contacts and AI columns split name and title. Company names, domains and people are blurred.</figcaption></figure>
+      <figure class="shot"><a href="shots/comcap-ma-contacts.jpg" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="shots/comcap-ma-contacts.jpg" alt="Clay table of senior M&amp;A contacts with run conditions and LinkedIn URL column" loading="lazy" width="1896" height="892"></a><figcaption><span class="tag">Screenshot</span> Senior M&amp;A contacts. Rows that don't meet the run condition are skipped. Names and LinkedIn URLs are blurred.</figcaption></figure>
+    </div>
+  </article>
+
+  <!-- ============ CASE STUDY 2 ============ -->
+  <article class="case" id="prospecting">
+    <div class="case-head">
+      <p class="eyebrow">Case study · AMCOB</p>
+      <h2>Prospect list and qualification engine</h2>
+    </div>
+    <p class="problem">Source and qualify a prospect list of 185,000+ leads.</p>
+    <figure class="diagram"><div class="dg-scroll"><svg class="dg dg-wide" viewBox="0 0 800 200" role="img" aria-label="Prospecting engine: Apollo, Prospeo and Apify feed a merge step, Claude qualifies each lead against the ICP, ZeroBounce verifies emails, and leads are distributed through the CRM. 185,000+ leads."><defs><marker id="ah2w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><text x="70" y="18" text-anchor="middle" class="bl">sources</text><rect class="n" x="10" y="28" width="120" height="40" rx="6"/><text x="70" y="51.5" text-anchor="middle">Apollo</text><rect class="n" x="10" y="84" width="120" height="40" rx="6"/><text x="70" y="107.5" text-anchor="middle">Prospeo</text><rect class="n" x="10" y="140" width="120" height="40" rx="6"/><text x="70" y="163.5" text-anchor="middle">Apify</text><path class="edge" d="M130,48 L150,48 L150,104"/><path class="edge" d="M130,160 L150,160 L150,104"/><path class="edge" d="M130,104 L168,104" marker-end="url(#ah2w)"/><rect class="n" x="170" y="79" width="125" height="50" rx="6"/><text x="232.5" y="100" text-anchor="middle">Combine</text><text x="232.5" y="115" text-anchor="middle" class="lbl">sources</text><path class="edge" d="M295,104 L333,104" marker-end="url(#ah2w)"/><rect class="n key" x="335" y="72" width="165" height="64" rx="6"/><text x="417.5" y="100" text-anchor="middle">Claude</text><text x="417.5" y="115" text-anchor="middle">ICP qualification</text><path class="edge" d="M500,104 L538,104" marker-end="url(#ah2w)"/><rect class="n" x="540" y="79" width="120" height="50" rx="6"/><text x="600" y="100" text-anchor="middle">ZeroBounce</text><text x="600" y="115" text-anchor="middle" class="lbl">email verification</text><path class="edge" d="M660,104 L698,104" marker-end="url(#ah2w)"/><rect class="n" x="700" y="79" width="90" height="50" rx="6"/><text x="745" y="100" text-anchor="middle">CRM</text><text x="745" y="115" text-anchor="middle" class="lbl">distribution</text><text x="480" y="182" text-anchor="middle" class="cnt">185,000+ leads sourced and qualified</text></svg><svg class="dg dg-tall" viewBox="0 0 340 466" role="img" aria-label="Prospecting engine: Apollo, Prospeo and Apify feed a merge step, Claude qualifies each lead against the ICP, ZeroBounce verifies emails, and leads are distributed through the CRM. 185,000+ leads."><defs><marker id="ah2t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><text x="170" y="12" text-anchor="middle" class="bl">sources</text><rect class="n" x="10" y="20" width="96" height="40" rx="6"/><text x="58" y="43.5" text-anchor="middle">Apollo</text><rect class="n" x="122" y="20" width="96" height="40" rx="6"/><text x="170" y="43.5" text-anchor="middle">Prospeo</text><rect class="n" x="234" y="20" width="96" height="40" rx="6"/><text x="282" y="43.5" text-anchor="middle">Apify</text><path class="edge" d="M58,60 L58,76 L170,76"/><path class="edge" d="M282,60 L282,76 L170,76"/><path class="edge" d="M170,60 L170,98" marker-end="url(#ah2t)"/><rect class="n" x="40" y="100" width="260" height="50" rx="6"/><text x="170" y="121" text-anchor="middle">Combine</text><text x="170" y="136" text-anchor="middle" class="lbl">sources</text><path class="edge" d="M170.0,150 L170.0,174" marker-end="url(#ah2t)"/><rect class="n key" x="40" y="176" width="260" height="64" rx="6"/><text x="170" y="204" text-anchor="middle">Claude</text><text x="170" y="219" text-anchor="middle">ICP qualification</text><path class="edge" d="M170.0,240 L170.0,264" marker-end="url(#ah2t)"/><rect class="n" x="40" y="266" width="260" height="50" rx="6"/><text x="170" y="287" text-anchor="middle">ZeroBounce</text><text x="170" y="302" text-anchor="middle" class="lbl">email verification</text><path class="edge" d="M170.0,316 L170.0,340" marker-end="url(#ah2t)"/><rect class="n" x="40" y="342" width="260" height="50" rx="6"/><text x="170" y="363" text-anchor="middle">CRM</text><text x="170" y="378" text-anchor="middle" class="lbl">distribution</text><text x="170" y="422" text-anchor="middle" class="cnt">185,000+ leads sourced and qualified</text></svg></div><figcaption><span class="tag">Diagram</span> Sourcing to CRM.</figcaption></figure>
+    <dl class="kv">
+      <dt>Stack</dt>
+      <dd class="stack">Apollo · Prospeo · Apify · Claude · ZeroBounce · CRM</dd>
+      <dt>Decisions</dt>
+      <dd><ul>
+        <li>Apollo, Prospeo and Apify are combined for extraction.</li>
+        <li>Claude qualifies each lead against ICP criteria.</li>
+        <li>ZeroBounce verifies emails before leads go out.</li>
+        <li>Qualified leads are distributed through the CRM.</li>
+      </ul></dd>
+      <dt>Results</dt>
+      <dd><table class="results"><tbody>
+        <tr><td>185,000+</td><td>leads sourced and qualified</td></tr>
+      </tbody></table></dd>
+      <dt>Est. impact</dt>
+      <dd class="est"><span class="pill est-pill">Estimate, not measured</span><table class="results"><tbody><tr><td>3,700 to 9,250</td><td>bounces avoided if the 185,000+ list were emailed once without verification</td></tr><tr><td>under 2%</td><td>target bounce rate after verification, the safe sending limit</td></tr></tbody></table><p class="basis">Basis: unverified lists bounce at 2% to 5%+ and verified lists at 0.5% to 1.5%, per <a href="https://prospeo.io/s/cold-email-bounce-rate" target="_blank" rel="noopener">Prospeo</a>. Assumes every lead is emailed once.</p></dd>
+    </dl>
+  </article>
+
+  <!-- ============ CASE STUDY 3 ============ -->
+  <article class="case" id="enrichment">
+    <div class="case-head">
+      <p class="eyebrow">Case study</p>
+      <h2>Company enrichment pipeline</h2>
+    </div>
+    <p class="problem">134K contacts mapped to ~79K unique companies, enriched in two phases.</p>
+    <figure class="diagram"><div class="dg-scroll"><svg class="dg dg-wide" viewBox="0 0 800 180" role="img" aria-label="Enrichment pipeline: 134K contact records go through a free consolidation script in Phase 1, giving about 79K unique companies, which a Claude API script enriches in Phase 2 to produce the enriched company dataset."><defs><marker id="ah3w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><rect class="band" x="163" y="22" width="164" height="118" rx="8"/><text x="173" y="37" text-anchor="start" class="bl">Phase 1 · free</text><rect class="band" x="493" y="22" width="164" height="118" rx="8"/><text x="503" y="37" text-anchor="start" class="bl">Phase 2 · Claude API</text><rect class="n" x="10" y="60" width="130" height="60" rx="6"/><text x="75" y="86" text-anchor="middle">Contact records</text><text x="75" y="101" text-anchor="middle" class="cnt">134K</text><rect class="n key" x="175" y="60" width="140" height="60" rx="6"/><text x="245" y="86" text-anchor="middle">Consolidation</text><text x="245" y="101" text-anchor="middle" class="lbl">script (free)</text><rect class="n" x="348" y="60" width="124" height="60" rx="6"/><text x="410" y="86" text-anchor="middle">Unique companies</text><text x="410" y="101" text-anchor="middle" class="cnt">~79K</text><rect class="n key" x="505" y="60" width="140" height="60" rx="6"/><text x="575" y="86" text-anchor="middle">Enrichment</text><text x="575" y="101" text-anchor="middle" class="lbl">script (Claude API)</text><rect class="n" x="680" y="60" width="115" height="60" rx="6"/><text x="737.5" y="86" text-anchor="middle">Enriched</text><text x="737.5" y="101" text-anchor="middle">company dataset</text><path class="edge" d="M140,90 L173,90" marker-end="url(#ah3w)"/><path class="edge" d="M315,90 L346,90" marker-end="url(#ah3w)"/><path class="edge" d="M472,90 L503,90" marker-end="url(#ah3w)"/><path class="edge" d="M645,90 L678,90" marker-end="url(#ah3w)"/><text x="410" y="162" text-anchor="middle" class="lbl">enriched once per company</text></svg><svg class="dg dg-tall" viewBox="0 0 340 478" role="img" aria-label="Enrichment pipeline: 134K contact records go through a free consolidation script in Phase 1, giving about 79K unique companies, which a Claude API script enriches in Phase 2 to produce the enriched company dataset."><defs><marker id="ah3t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 Z"/></marker></defs><rect class="n" x="40" y="10" width="260" height="50" rx="6"/><text x="170" y="31" text-anchor="middle">Contact records</text><text x="170" y="46" text-anchor="middle" class="cnt">134K</text><path class="edge" d="M170,60 L170,110" marker-end="url(#ah3t)"/><rect class="band" x="20" y="86" width="300" height="84" rx="8"/><text x="30" y="101" text-anchor="start" class="bl">Phase 1 · free</text><rect class="n key" x="40" y="112" width="260" height="50" rx="6"/><text x="170" y="133" text-anchor="middle">Consolidation</text><text x="170" y="148" text-anchor="middle" class="lbl">script (free)</text><path class="edge" d="M170,162 L170,194" marker-end="url(#ah3t)"/><rect class="n" x="40" y="196" width="260" height="50" rx="6"/><text x="170" y="217" text-anchor="middle">Unique companies</text><text x="170" y="232" text-anchor="middle" class="cnt">~79K</text><path class="edge" d="M170,246 L170,296" marker-end="url(#ah3t)"/><rect class="band" x="20" y="272" width="300" height="84" rx="8"/><text x="30" y="287" text-anchor="start" class="bl">Phase 2 · Claude API</text><rect class="n key" x="40" y="298" width="260" height="50" rx="6"/><text x="170" y="319" text-anchor="middle">Enrichment</text><text x="170" y="334" text-anchor="middle" class="lbl">script (Claude API)</text><path class="edge" d="M170,348 L170,380" marker-end="url(#ah3t)"/><rect class="n" x="40" y="382" width="260" height="50" rx="6"/><text x="170" y="403" text-anchor="middle">Enriched</text><text x="170" y="418" text-anchor="middle">company dataset</text><text x="170" y="464" text-anchor="middle" class="lbl">enriched once per company</text></svg></div><figcaption><span class="tag">Diagram</span> Two-phase enrichment. Consolidation runs first, then the API enrichment.</figcaption></figure>
+    <dl class="kv">
+      <dt>Stack</dt>
+      <dd class="stack">Consolidation script · Claude API</dd>
+      <dt>Decisions</dt>
+      <dd><ul>
+        <li>Phase 1 is a free consolidation script that maps 134K contacts to ~79K unique companies.</li>
+        <li>Phase 2 is a Claude API enrichment script that runs on the consolidated company list.</li>
+        <li>Consolidating first keeps paid API calls to unique companies only.</li>
+      </ul></dd>
+      <dt>Results</dt>
+      <dd><table class="results"><tbody>
+        <tr><td>134K</td><td>contacts processed</td></tr>
+        <tr><td>~79K</td><td>unique companies enriched</td></tr>
+      </tbody></table></dd>
+      <dt>Est. impact</dt>
+      <dd class="est"><span class="pill est-pill">Estimate, not measured</span><table class="results"><tbody><tr><td>~55K</td><td>fewer paid enrichment calls (134K contacts down to ~79K companies)</td></tr><tr><td>~41%</td><td>lower API spend than enriching per contact</td></tr></tbody></table><p class="basis">Basis: simple arithmetic, assuming one enrichment call per company in Phase 2 instead of one per contact.</p></dd>
+    </dl>
+  </article>
+
+  <section id="also" aria-labelledby="also-h">
+    <h2 id="also-h">Also built</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Clay employment verification</h3>
+        <p>Clay table workflows with AI columns that verify where a contact currently works.</p>
+        <p class="stack">Clay · AI columns</p>
+      </div>
+      <div class="card">
+        <h3>HubSpot data quality</h3>
+        <p>Constant Contact suppression for event registrants through Zapier, to keep event registrants out of Constant Contact marketing sends.</p>
+        <p>Evaluated dedup options: Insycle, Claude for Excel, and n8n calling the HubSpot Merge API.</p>
+        <p class="stack">HubSpot · Zapier · Constant Contact</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="next" aria-labelledby="next-h">
+    <h2 id="next-h">What I'd build next</h2>
+    <div class="concept">
+      <span class="pill">Concept, not built</span>
+      <h3>Lead qualification tool</h3>
+      <p>Paste up to 1,000 LinkedIn profile URLs plus ICP criteria. The tool pulls profile data from a licensed provider waterfall (Apollo, Cognism, Lusha, Clay marketplace), runs a two-pass AI qualifier, and hands qualified leads to HubSpot. Designed around GDPR and CCPA.</p>
+    </div>
+  </section>
+
+  <footer>Last updated November 2026</footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('preview-toggle');
+  var wrap = document.getElementById('top');
+  if (!btn || !wrap) return;
+  btn.addEventListener('click', function () {
+    var on = wrap.classList.toggle('preview');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? 'Show markers' : 'Preview without markers';
+  });
+})();
+</script>
+
+</body>
+</html>
