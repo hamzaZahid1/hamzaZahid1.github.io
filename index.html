@@ -176,6 +176,10 @@ a.bc:hover { outline: 2px solid rgba(20,33,61,.25); }
 .lg.nl { border-style: dashed; color: #4A5878; }
 @media (max-width: 560px) { .bc { grid-column: span 6; } .b-big b { font-size: 2rem; } }
 .bd { font-size: 0.9rem; }
+/* smaller logo tiles inside the four project cards; the stack row keeps the normal size */
+.bc:not(.b-white) .tools { gap: 5px; }
+.bc:not(.b-white) .lg { height: 24px; padding: 0 8px; gap: 5px; font-size: 11px; border-radius: 6px; }
+.bc:not(.b-white) .lg img { height: 12px; max-width: 58px; }
 </style>
 </head>
 <body>
