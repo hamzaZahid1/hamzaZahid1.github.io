@@ -175,6 +175,7 @@ a.bc:hover { outline: 2px solid rgba(20,33,61,.25); }
 .lg img { height: 16px; width: auto; max-width: 74px; display: block; }
 .lg.nl { border-style: dashed; color: #4A5878; }
 @media (max-width: 560px) { .bc { grid-column: span 6; } .b-big b { font-size: 2rem; } }
+.bd { font-size: 0.9rem; }
 </style>
 </head>
 <body>
@@ -202,19 +203,19 @@ a.bc:hover { outline: 2px solid rgba(20,33,61,.25); }
       <a class="bc b-amber" href="#prospecting">
         <h3>Prospect list and qualification engine</h3>
         <div class="bn"><div><b>185,000+</b><span>leads sourced and qualified</span></div></div>
-        <div class="tools"><span class="lg"><img src="logos/apollo.svg" alt="Apollo logo"></span><span class="lg"><img src="logos/prospeo.svg" alt="Prospeo logo">Prospeo</span><span class="lg"><img src="logos/apify.svg" alt="Apify logo"></span><span class="lg"><img src="logos/claude-icon.svg" alt="Claude logo">Claude</span><span class="lg"><img src="logos/zerobounce.png" alt="ZeroBounce logo"></span></div>
+        <div class="tools"><span class="lg"><img src="logos/apollo.svg" alt="Apollo logo"></span><span class="lg"><img src="logos/prospeo.png" alt="Prospeo logo"></span><span class="lg"><img src="logos/apify.svg" alt="Apify logo"></span><span class="lg"><img src="logos/claude-icon.svg" alt="Claude logo">Claude</span><span class="lg"><img src="logos/zerobounce.png" alt="ZeroBounce logo"></span></div>
       </a>
-      <a class="bc b-purple" href="#enrichment">
-        <h3>Company enrichment pipeline</h3>
-        <div class="bn"><div><b>134K</b><span>contacts processed</span></div><div><b>~79K</b><span>unique companies enriched</span></div></div>
-        <div class="tools"><span class="lg"><img src="logos/claude-icon.svg" alt="Claude logo">Claude API</span><span class="lg nl">Consolidation script</span></div>
+      <a class="bc b-purple" href="#multichannel">
+        <h3>Multi-channel outbound engine</h3>
+        <p class="bd">Lead qualification and enrichment feeding email and LinkedIn outreach.</p>
+        <div class="tools"><span class="lg"><img src="logos/heyreach.png" alt="HeyReach logo"></span><span class="lg"><img src="logos/smartlead.webp" alt="Smartlead logo"></span><span class="lg"><img src="logos/instantly.svg" alt="Instantly logo"></span><span class="lg"><img src="logos/lemlist.svg" alt="lemlist logo"></span></div>
       </a>
       <div class="bc b-white" aria-label="Stack">
         <span class="eyebrow">Stack</span>
         <div class="tools">
           <span class="lg"><img src="logos/hubspot.svg" alt="HubSpot logo"></span><span class="lg"><img src="logos/salesforce.svg" alt="Salesforce logo"></span><span class="lg"><img src="logos/pipedrive.svg" alt="Pipedrive logo"></span><span class="lg nl">GoHighLevel</span>
           <span class="lg"><img src="logos/clay.avif" alt="Clay logo"></span><span class="lg"><img src="logos/n8n-icon.svg" alt="n8n logo">n8n</span><span class="lg"><img src="logos/apollo.svg" alt="Apollo logo"></span><span class="lg"><img src="logos/apify.svg" alt="Apify logo"></span>
-          <span class="lg"><img src="logos/prospeo.svg" alt="Prospeo logo">Prospeo</span><span class="lg"><img src="logos/zerobounce.png" alt="ZeroBounce logo"></span><span class="lg"><img src="logos/zapier.svg" alt="Zapier logo"></span><span class="lg"><img src="logos/claude-icon.svg" alt="Claude logo">Claude API</span>
+          <span class="lg"><img src="logos/prospeo.png" alt="Prospeo logo"></span><span class="lg"><img src="logos/zerobounce.png" alt="ZeroBounce logo"></span><span class="lg"><img src="logos/heyreach.png" alt="HeyReach logo"></span><span class="lg"><img src="logos/smartlead.webp" alt="Smartlead logo"></span><span class="lg"><img src="logos/instantly.svg" alt="Instantly logo"></span><span class="lg"><img src="logos/lemlist.svg" alt="lemlist logo"></span><span class="lg"><img src="logos/zapier.svg" alt="Zapier logo"></span><span class="lg"><img src="logos/claude-icon.svg" alt="Claude logo">Claude API</span>
           <span class="lg"><img src="logos/postgresql.svg" alt="PostgreSQL logo">SQL</span><span class="lg"><img src="logos/microsoft-power-bi.svg" alt="Power BI logo">Power BI</span><span class="lg nl">Google Sheets</span><span class="lg nl">Excel/VBA</span>
         </div>
       </div>
@@ -230,6 +231,7 @@ a.bc:hover { outline: 2px solid rgba(20,33,61,.25); }
     <a href="#job-change">Job-change detection</a>
     <a href="#comcap">M&amp;A prospecting</a>
     <a href="#prospecting">Prospecting engine</a>
+    <a href="#multichannel">Multi-channel outbound</a>
     <a href="#enrichment">Enrichment pipeline</a>
     <a href="#also">Also built</a>
     <a href="#next">Next</a>
@@ -321,6 +323,24 @@ a.bc:hover { outline: 2px solid rgba(20,33,61,.25); }
       </tbody></table></dd>
       <dt>Est. impact</dt>
       <dd class="est"><span class="pill est-pill">Estimate, not measured</span><table class="results"><tbody><tr><td>3,700 to 9,250</td><td>bounces avoided if the 185,000+ list were emailed once without verification</td></tr><tr><td>under 2%</td><td>target bounce rate after verification, the safe sending limit</td></tr></tbody></table><p class="basis">Basis: unverified lists bounce at 2% to 5%+ and verified lists at 0.5% to 1.5%, per <a href="https://prospeo.io/s/cold-email-bounce-rate" target="_blank" rel="noopener">Prospeo</a>. Assumes every lead is emailed once.</p></dd>
+    </dl>
+  </article>
+
+  <!-- ============ CASE STUDY: MULTI-CHANNEL OUTBOUND ============ -->
+  <article class="case" id="multichannel">
+    <div class="case-head">
+      <p class="eyebrow">Case study</p>
+      <h2>Multi-channel outbound engine</h2>
+    </div>
+    <p class="problem">Qualify and enrich leads, then reach them across email and LinkedIn from one outbound system.</p>
+    <dl class="kv">
+      <dt>Stack</dt>
+      <dd class="stack">HeyReach · Smartlead · Instantly · lemlist</dd>
+      <dt>Decisions</dt>
+      <dd><ul>
+        <li>Leads are qualified and enriched before they enter a sequence.</li>
+        <li>Outreach runs across channels: email sequences and LinkedIn outreach through HeyReach.</li>
+      </ul></dd>
     </dl>
   </article>
 
